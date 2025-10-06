@@ -1,0 +1,36 @@
+import { writeFileSync } from 'fs';
+import { Aeronave } from "./Aeronaves.js";
+export class Relatorio {
+    static gerar(aeronave, nomeCliente) {
+        let conteudo = `--- RELATÓRIO FINAL DA AERONAVE ---\n\n`;
+        conteudo += `Cliente: ${nomeCliente}\n`;
+        conteudo += `Data de Entrega: ${new Date().toLocaleDateString('pt-BR')}\n\n`;
+        conteudo += `--- Dados da Aeronave ---\n`;
+        conteudo += `Código: ${aeronave.codigo}\n`;
+        conteudo += `Modelo: ${aeronave.modelo}\n\n`;
+        conteudo += `--- Peças Utilizadas ---\n`;
+        aeronave.pecas.forEach(p => {
+            conteudo += `- ${p.nome} (Fornecedor: ${p.fornecedor}, Status: ${p.status})\n`;
+        });
+        conteudo += `\n`;
+        conteudo += `--- Etapas da Produção Realizadas ---\n`;
+        aeronave.etapas.forEach(e => {
+            conteudo += `- ${e.nome} (Prazo: ${e.prazo}, Status: ${e.status})\n`;
+        });
+        conteudo += `\n`;
+        conteudo += `--- Resultados dos Testes ---\n`;
+        aeronave.testes.forEach(t => {
+            conteudo += `- Teste ${t.tipo}: ${t.resultado}\n`;
+        });
+        conteudo += `\n`;
+        const nomeArquivo = `relatorio_${aeronave.codigo}.txt`;
+        try {
+            writeFileSync(nomeArquivo, conteudo);
+            console.log(`\nRelatório gerado com sucesso: ${nomeArquivo}`);
+        }
+        catch (erro) {
+            console.error('Falha ao gerar relatório:', erro);
+        }
+    }
+}
+//# sourceMappingURL=Relatorio.js.map
