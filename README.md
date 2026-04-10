@@ -60,7 +60,7 @@ Antes de começar, você precisará ter instalado:
 
 ```bash
 # 1. Clone o repositório
-git clone [https://github.com/seu-usuario/aerocode.git](https://github.com/seu-usuario/aerocode.git)
+git clone https://github.com/Giommn/AV1.git
 
 # 2. Entre na pasta do projeto
 cd aerocode
